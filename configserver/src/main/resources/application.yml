@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: git
+  #active: native
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/MoetezMaaoui/config-repo.git
+          default-label: main
+          clone-on-start: true
+        #native:
+          #search-locations: "classpath:/config"
+          #search-locations: file:///C:/Users/MSI/Documents/intelliJ_workspace/moetez-spring-cloud/config-repo
+server:
+  port: 9999

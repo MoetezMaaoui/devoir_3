@@ -1,0 +1,43 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: gatewayserver
+  cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: true
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+      routes:
+        - id: r1
+          uri: lb://CHAMPIONNAT
+          predicates:
+            - Path= /api/championnats/**
+        - id: r2
+          uri: lb://DRIVER
+          predicates:
+            - Path= /api/driver/**
+
+
+  eureka:
+    client:
+      service-url:
+        defaultZone: 'http://localhost:8761/eureka/'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+
+eureka:
+  instance:
+    prefer-ip-address: true
